@@ -1,0 +1,7 @@
+2016-03-23 11:55:41.061505 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-03-23 11:55:47.605553 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-03-23 11:55:51.558564 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-03-23 11:55:56.719759 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-03-23 11:56:18.694563 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-03-23 11:56:23.250738 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-03-23 11:56:26.539971 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
