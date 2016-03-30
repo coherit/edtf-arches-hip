@@ -77,7 +77,7 @@ define(['jquery',
                     data: this.data,
                     dataKey: 'important_dates',
                     validateBranch: function (nodes) {
-                        return this.validateHasValues(nodes);
+                        return this.validateEdtf(nodes);
                     }
                 }));
 

@@ -1,5 +1,0 @@
-.git*
-tests/
-node_modules
-Gulpfile.js
-parser.pegjs

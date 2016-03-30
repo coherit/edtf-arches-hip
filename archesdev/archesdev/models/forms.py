@@ -29,12 +29,15 @@ from django.forms.models import model_to_dict
 from django.utils.translation import ugettext as _
 from django.forms.models import model_to_dict
 from datetime import datetime
+from flexidate import parse
 
 def datetime_nodes_to_dates(branch_list):
     for branch in branch_list:
         for node in branch['nodes']:
-            if isinstance(node.value, datetime):
-                node.value = node.value.date()
+            if isinstance(node.value, datetime):                
+                fd = parse(node.value)
+                node.value = fd.as_datetime()               
+                #node.value = node.value.date()
                 node.label = node.value
 
     return branch_list
