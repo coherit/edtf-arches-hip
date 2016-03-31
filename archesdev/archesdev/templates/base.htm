@@ -111,7 +111,7 @@
                 'blueimp-gallery': 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.15.2/js/blueimp-gallery',
                 'blueimp-jquery': 'http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery',
                 'blueimp-helper': 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.15.2/js/blueimp-helper.min',
-                'edtfy': '{{ STATIC_URL }}/js/plugins/edtfy/edtfy.min',
+                'edtfy': '{{ STATIC_URL }}/js/plugins/edtfy/edtfy',
             },
             shim: {
                 'openlayers': {
@@ -148,6 +148,7 @@
                         buffer: "{% url 'buffer'%}",
                         related_resources: "{% url 'related_resources' 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' %}".replace('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', ''),
                         get_admin_areas: "{% url 'get_admin_areas'%}",
+                        edtf: "{% url 'edtf:edtf_form'%}",
                     },
                     mapDefaults: {
                         x: {{ map_info.x }},

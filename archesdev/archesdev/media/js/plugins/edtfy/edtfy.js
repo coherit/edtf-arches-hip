@@ -65,11 +65,11 @@ module.exports = function(string, options) {
       if (!result) {
         result = parser.parse(string, {format: format});
       }
-   /* } catch (e) {
+    } catch (e) {
       if (i === localeData.format.length - 1) {
         throw e;
       }
-    }*/
+    }
   });
   return result;
 }
@@ -96,7 +96,7 @@ module.exports = {
   seasons: ['spring', 'summer', 'autumn|fall', 'winter'],
   century: 'century',
   format: ['mdy', 'dmy'],
-  around: 'around|about|abt|close to',
+  around: 'around|about|abt|close to|circa|c.',
   between1: 'between|bet|from',
   between2: 'to',
   and: 'and',

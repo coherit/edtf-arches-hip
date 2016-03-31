@@ -2,7 +2,9 @@ define(['jquery',
     'backbone', 
     'knockout', 
     'knockout-mapping', 
-    'underscore','edtfy',], function ($, Backbone, ko, koMapping, _) {
+    'underscore',
+    'edtfy',
+    'arches'], function ($, Backbone, ko, koMapping, _, edtfy, arches) {
     return Backbone.View.extend({
 
         events: {
@@ -86,8 +88,24 @@ define(['jquery',
 					console.log(node.value);
 					edtfy = require("edtfy");
 					edtfy.locale('en');
-					edtfdate = edtfy(node.value);
-                  	console.log(edtfdate);
+					edtfdate = edtfy(node.value); 
+					/* insert if statement to handle error if the date entered was already in good edtf format */
+                  	console.log(arches.urls);
+                  	this.validedtfRequest = $.ajax({
+		                type: "POST",
+		                url: arches.urls.edtf,
+		                contentType: "application/json",
+		                accepts: "application/json",
+		                cache: false,
+		                dataType: 'json',
+		                data: JSON.stringify(edtfdate),		                
+		                success: function (data) {
+					      alert(JSON.stringify(data));
+					    },
+					    error: function(){
+					      alert("Cannot get data");
+					    }		                
+		            });
                   }                                                     	
                 }
                 

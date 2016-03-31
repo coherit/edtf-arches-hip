@@ -22,5 +22,6 @@ from django.conf.urls import patterns, url, include
 uuid_regex = '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 
 urlpatterns = patterns('',
+    url(r'^edtf/', include('edtf.urls', namespace='edtf')),
     url(r'', include(arches_hip_urls)),
 )
