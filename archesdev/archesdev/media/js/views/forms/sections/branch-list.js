@@ -4,7 +4,8 @@ define(['jquery',
     'knockout-mapping', 
     'underscore',
     'edtfy',
-    'arches'], function ($, Backbone, ko, koMapping, _, edtfy, arches) {
+    'arches',
+    'cookie'], function ($, Backbone, ko, koMapping, _, edtfy, arches, cookie) {
     return Backbone.View.extend({
 
         events: {
@@ -90,7 +91,7 @@ define(['jquery',
 					edtfy.locale('en');
 					edtfdate = edtfy(node.value); 
 					/* insert if statement to handle error if the date entered was already in good edtf format */
-                  	console.log(arches.urls);
+                  	var csrftoken = cookie.get('csrftoken');
                   	this.validedtfRequest = $.ajax({
 		                type: "POST",
 		                url: arches.urls.edtf,
@@ -99,6 +100,9 @@ define(['jquery',
 		                cache: false,
 		                dataType: 'json',
 		                data: JSON.stringify(edtfdate),		                
+		                beforeSend: function(xhr, settings) {
+							xhr.setRequestHeader("X-CSRFToken", csrftoken);
+						},		                
 		                success: function (data) {
 					      alert(JSON.stringify(data));
 					    },
