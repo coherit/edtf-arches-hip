@@ -4,8 +4,7 @@ define(['jquery',
     'knockout-mapping', 
     'underscore',
     'edtfy',
-    'arches',
-    'cookie'], function ($, Backbone, ko, koMapping, _, edtfy, arches, cookie) {
+    'arches'], function ($, Backbone, ko, koMapping, _, edtfy, arches) {
     return Backbone.View.extend({
 
         events: {
@@ -76,48 +75,57 @@ define(['jquery',
             }, this);
             return valid;
         },
-/* Check if there are values given; check for the E49 value and run edtfy parser - need to insert validation step prior to parse */        
-        validateEdtf: function(nodes){
-            var valid = nodes != undefined && nodes.length > 0;
+        
+		validateEdtf: function(nodes, callback){
+			var valid = nodes != undefined && nodes.length > 0;               
             _.each(nodes, function (node) {
                 if (node.entityid === '' && node.value === ''){
                     valid = false;
                 }
                 else {
                   entityid = node.entitytypeid.slice(-3);
+                  /* if the value is a cidoc date type, validate further */
                   if (entityid == 'E49') {                 
-					console.log(node.value);
-					edtfy = require("edtfy");
-					edtfy.locale('en');
-					edtfdate = edtfy(node.value); 
-					/* insert if statement to handle error if the date entered was already in good edtf format */
-                  	var csrftoken = cookie.get('csrftoken');
-                  	this.validedtfRequest = $.ajax({
-		                type: "POST",
+					return $.ajax({
+		                type: "GET",
 		                url: arches.urls.edtf,
 		                contentType: "application/json",
-		                accepts: "application/json",
+		                accept: "application/json",
 		                cache: false,
 		                dataType: 'json',
-		                data: JSON.stringify(edtfdate),		                
-		                beforeSend: function(xhr, settings) {
-							xhr.setRequestHeader("X-CSRFToken", csrftoken);
-						},		                
-		                success: function (data) {
-					      alert(JSON.stringify(data));
-					    },
+		                data: {'date':node.value},		                		               	                				
+		                success: function (data) {					      					      
+					    /* if false, see if it can be parsed 	*/      
+			     			callback(data.validEDTF);
+			     		},
 					    error: function(){
 					      alert("Cannot get data");
 					    }		                
 		            });
-                  }                                                     	
-                }
-                
+		          }		          				                                                                     	
+                }               
             }, this);
-            return valid;
+            
         },
 
-
+/*		validateEdtf: function(date, callback){
+			$.ajax({
+                type: "GET",
+                url: arches.urls.edtf,
+                contentType: "application/json",
+                accept: "application/json",
+                cache: false,
+                dataType: 'json',
+                data: {'date':date},		                		               	                				
+                success: function (data) {					      					      
+			     callback(data.validEDTF);
+			    },
+			    error: function(){
+			      alert("Cannot get data");
+			    },			    	                
+            });
+		},
+*/
         getEditedNode: function(entitytypeid, key){
             this.addDefaultNode(entitytypeid, key, '');
             return ko.pureComputed({
@@ -203,8 +211,11 @@ define(['jquery',
 
         addItem: function() {
             var branch = this.getEditedBranch();
+            var debug = ko.toJS(branch.nodes);
+            console.log(debug);
             var validationAlert = this.$el.find('.branch-invalid-alert');
             if (this.validateBranch(ko.toJS(branch.nodes))) {
+                console.log('if');
                 var branch = this.getEditedBranch();
                 branch.editing(false);
                 this.addBlankEditBranch();
@@ -212,6 +223,7 @@ define(['jquery',
                 this.trigger('change', 'add', branch);
             } else {
                 validationAlert.show(300);
+                console.log('else');
                 setTimeout(function() {
                     validationAlert.fadeOut();
                 }, 5000);

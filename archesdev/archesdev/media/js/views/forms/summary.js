@@ -1,10 +1,10 @@
 define(['jquery', 
-    'underscore', 
+    'underscore',
     'knockout-mapping', 
     'views/forms/base', 
     'views/forms/sections/branch-list',
     'bootstrap-datetimepicker',], 
-    function ($, _, koMapping, BaseForm, BranchList) {
+    function ($, _, koMapping, BaseForm, BranchList, async) {
         return BaseForm.extend({
             initialize: function() {
                 BaseForm.prototype.initialize.apply(this);                
@@ -76,8 +76,11 @@ define(['jquery',
                     el: this.$el.find('#dates-section')[0],
                     data: this.data,
                     dataKey: 'important_dates',
-                    validateBranch: function (nodes) {
-                        return this.validateEdtf(nodes);
+                    validateBranch: function (nodes) {                                    			
+						this.validateEdtf(nodes, function(data) {
+							console.log(data);
+							return data;
+						});						     		    
                     }
                 }));
 
@@ -86,7 +89,9 @@ define(['jquery',
                     data: this.data,
                     dataKey: 'KEYWORD.E55',
                     validateBranch: function (nodes) {
-                        return this.validateHasValues(nodes);
+                        var something = this.validateHasValues(nodes);
+                        console.log(something);
+                        return something;
                     }
                 }));
             }

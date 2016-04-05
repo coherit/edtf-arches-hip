@@ -199,9 +199,9 @@
                                 <div class="margin-top-5 hidden-sm hidden-md hidden-lg"></div>
 
                                 <div class="col-sm-4 form-group hidden-xs" style="padding-left: 0px; padding-right: 0px; width: 30%;">
-                                    <div class="input-group datetimepicker" style ="width:100%;" >
-                                        <input style="font-size: 13px; height:32px;" type="text" id="date" placeholder="{% trans 'yyyy/mm/dd' %}" class="form-control datepicker" data-date-format="YYYY/MM/DD" data-bind="{value: getEditedNode('START_DATE_OF_EXISTENCE.E49,END_DATE_OF_EXISTENCE.E49', 'value','edtf')} ">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <div class="input-group" style ="width:100%;" >
+                                        <input style="font-size: 13px; height:32px;" type="text" id="date" placeholder="{% trans 'yyyy/mm/dd or EDTF date' %}" class="form-control datepicker" data-date-format="YYYY/MM/DD" data-bind="{value: getEditedNode('START_DATE_OF_EXISTENCE.E49,END_DATE_OF_EXISTENCE.E49', 'value','edtf')} ">
+                                        
                                     </div>
                                 </div>
 
@@ -221,7 +221,7 @@
                         </div>
                     </dd>
                     <!-- End Form -->
-                    <div class="alert alert-danger branch-invalid-alert" role="alert" style="display:none;">{% trans "The date and type values must be populated." %}</div>
+                    <div class="alert alert-danger branch-invalid-alert" role="alert" style="display:none;">{% trans "The date and type values must be populated. Dates must be in EDTF." %}</div>
                 </dl>
 
             </div>
