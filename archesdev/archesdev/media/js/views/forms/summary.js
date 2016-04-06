@@ -89,9 +89,7 @@ define(['jquery',
                     data: this.data,
                     dataKey: 'KEYWORD.E55',
                     validateBranch: function (nodes) {
-                        var something = this.validateHasValues(nodes);
-                        console.log(something);
-                        return something;
+                        return this.validateHasValues(nodes);
                     }
                 }));
             }
