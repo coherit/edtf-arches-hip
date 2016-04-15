@@ -76,12 +76,9 @@ define(['jquery',
                     el: this.$el.find('#dates-section')[0],
                     data: this.data,
                     dataKey: 'important_dates',
-                    validateBranch: function (nodes) {                                    			
-						this.validateEdtf(nodes, function(data) {
-							console.log(data);
-							return data;
-						});						     		    
-                    }
+                    validateBranch: function (nodes) {                                  					    
+					   return this.validateEdtfy(nodes);   
+		            }
                 }));
 
                 this.addBranchList(new BranchList({
