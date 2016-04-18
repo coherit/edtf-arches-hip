@@ -4,8 +4,8 @@ define(['jquery',
     'knockout-mapping', 
     'underscore',
     'arches',
-    'bluebird',
-    'edtfy'], function ($, Backbone, ko, koMapping, _, arches, bluebird, edtfy) {
+    'edtfy',
+    'bootbox'], function ($, Backbone, ko, koMapping, _, arches, edtfy, bootbox) {
     return Backbone.View.extend({
 
         events: {
@@ -77,95 +77,6 @@ define(['jquery',
             return valid;
         },
         		
-       /* AML - short version  */
-       validateEdtf: function(nodes){
-       		var valid = nodes !== undefined && nodes.length > 0;
-			_.each(nodes, function(node) {
-				if (node.entityid === '' && node.value === '') {
-					return valid = false;
-				} else {
-					/* if the value is a cidoc E49, validate further */
-					var entityid = node.entitytypeid.slice(-3);
-					if (entityid == 'E49') {
-						var data = {'date': node.value};
-						$.when(this.getEdtfBack(data)).then(function(response) {
-      						console.log(response);
-      						return valid = response;
-   						});
-				
-					}
-				}
-			}, this);
- 		},		
-        	
-        getEdtfBack: function(date) {
-        	return $.getJSON(arches.urls.edtf, date).then(function(response) {return response.validEDTF; });	
-        },
-        /* AML - verbose ajax call */		
-		getEdtfResult: function(date) {
-			var ajaxResponse = $.ajax({
-		         type: "GET",
-		         url: arches.urls.edtf,
-		         contentType: "application/json",
-		         accept: "application/json",
-		         cache: false,
-		         timeout: 5000,
-		         dataType: 'json',
-		         data: {
-		           'date': date
-		         }
-		     })
-		     	.done(function(response) { 
- 					response = response.validEDTF;
- 					console.log(response);
-		     	})
-		     	.fail(function(xhr, status, errorThrown) {
-			         alert("Sorry, there was an problem.");
-			         console.log("Error: " + errorThrown);
-			         console.log("Status: " + status);
-			         console.dir(xhr);
-		     	});
-		    return ajaxResponse.success();
-		},
-
-	 	/* AML - bluebird way */
-       	validateBlueEdtf: function(nodes){
-       		var valid = nodes !== undefined && nodes.length > 0;
-			_.each(nodes, function(node) {
-				if (node.entityid === '' && node.value === '') {
-					valid = false;
-				} else {
-					/* if the value is a cidoc E49, validate further */
-					var entityid = node.entitytypeid.slice(-3);
-					if (entityid == 'E49') {
-						valid = $.when(this.getEdtfPromise(node.value)).done();   							
-						console.log(valid);
-					}
-				}
-			}, this);
- 		},		
-	 	
-	 	getEdtfPromise: function(date) {
-				Promise.resolve($.ajax({
-			         type: "GET",
-			         url: arches.urls.edtf,
-			         contentType: "application/json",
-			         accept: "application/json",
-			         cache: false,
-			         timeout: 5000,
-			         dataType: 'json',
-			         data: {
-			           'date': date
-			         }
-			    })).then(function(ajaxResult){
-     				alert( "success and complete!" );
-     				console.log(ajaxResult); 
-     				return ajaxResult;
-				}).catch(function(error){
-     				alert( "error" );
-				});
-		},
-
 	 	 validateEdtfy: function(nodes){
        		var valid = nodes !== undefined && nodes.length > 0;
 			_.each(nodes, function(node) {
@@ -185,7 +96,7 @@ define(['jquery',
 								valid = true;
 								console.log(valid);
 							} else {
-								alert('Try entering this instead: ' + parsed);
+								bootbox.alert('Try entering this instead: ' + parsed);
 								valid = false;
 							}
 						}
@@ -194,8 +105,7 @@ define(['jquery',
 							valid = false;
 						}
 					}
-				}
-				
+				}	
 			}, this);
 			console.log(valid);
 			return valid;
