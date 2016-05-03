@@ -5,7 +5,8 @@ define(['jquery',
     'underscore',
     'arches',
     'edtfy',
-    'bootbox'], function ($, Backbone, ko, koMapping, _, arches, edtfy, bootbox) {
+    'moment',
+    'bootbox'], function ($, Backbone, ko, koMapping, _, arches, edtfy, moment, bootbox) {
     return Backbone.View.extend({
 
         events: {
@@ -83,31 +84,50 @@ define(['jquery',
 				if (node.entityid === '' && node.value === '') {
 					valid = false;
 				} else {
-					/* if the value is a cidoc E49, validate further */
-					var entityid = node.entitytypeid.slice(-3);
-					if (entityid == 'E49') {			
-						edtfy = require('edtfy');
-						edtfy.locale('en');
-						try {
-    						console.log('input=' + node.value);
-    						var parsed = edtfy(node.value); 
-    						console.log('output=' + parsed);
-							if(parsed == node.value) {
-								valid = true;
-								console.log(valid);
-							} else {
-								bootbox.alert('Try entering this instead: ' + parsed);
+					/* if this is an interval, allow for current use */
+					if (node.entityid == 'TO_DATE.E49' && node.value == 'open') {
+						valid = true;
+					} else {
+						/* if the value is a cidoc E49, validate further */
+						var entityid = node.entitytypeid.slice(-3);
+						if (entityid == 'E49') {			
+							/* check for leading or trailing white spaces */
+							var original = node.value.length;
+							var trim = node.value.trim();
+							var trimmed = trim.length;
+							if (original != trimmed) {
+								bootbox.alert('Please check for spaces before or after your date.');
 								valid = false;
+							} else {						
+								/* use moment.js to check for a correct date format first */
+								var formats = ["YYYY-MM-DD", "YYYY-MM"]; 
+								var initial = moment(node.value, formats, true).isValid();
+								if (initial === true) {
+									valid = true;
+								} else {
+									/* node.value is not strictly valid as a date, so check if it fits edtf */
+									edtfy = require('edtfy');
+									edtfy.locale('en');
+									try {
+			    						var parsed = edtfy(node.value); 
+										if(parsed == node.value) {
+											/* user entered a correct edtf value */
+											valid = true;
+										} else {
+											/* user used a recognizable invalid format, suggest edit */
+											bootbox.alert('Try entering this instead: ' + parsed);
+											valid = false;
+										}
+									}
+									catch(err) {
+										valid = false;
+									}							
+								}
 							}
 						}
-						catch(err) {
-							console.log(err);
-							valid = false;
-						}
 					}
-				}	
+				}
 			}, this);
-			console.log(valid);
 			return valid;
  		},
 
