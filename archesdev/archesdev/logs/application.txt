@@ -1296,3 +1296,17 @@ Exception detail: search() got an unexpected keyword argument 'id'
 2016-05-05 13:57:50.835037 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
 2016-05-05 13:57:57.762414 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
 2016-05-06 08:08:45.438113 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-05-06 14:45:11.470425 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-05-06 14:45:17.277298: WARNING: search failed for query: {'query': {'match_all': {}}, 'from': 0, 'size': 100000} 
+Exception detail: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee485190>: Failed to establish a new connection: [Errno 111] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee485190>: Failed to establish a new connection: [Errno 111] Connection refused)
+
+2016-05-06 14:45:18.174305: WARNING: search failed for query: {'query': {'match_all': {}}, 'from': 0, 'size': 5} 
+Exception detail: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee1b0490>: Failed to establish a new connection: [Errno 111] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee1b0490>: Failed to establish a new connection: [Errno 111] Connection refused)
+
+2016-05-06 15:00:33.434406 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-05-06 15:00:36.154583: WARNING: search failed for query: {'query': {'match_all': {}}, 'from': 0, 'size': 100000} 
+Exception detail: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee495590>: Failed to establish a new connection: [Errno 111] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee495590>: Failed to establish a new connection: [Errno 111] Connection refused)
+
+2016-05-06 15:00:46.959591: WARNING: search failed for query: {'query': {'match_all': {}}, 'from': 0, 'size': 5} 
+Exception detail: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee1a4e50>: Failed to establish a new connection: [Errno 111] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7f92ee1a4e50>: Failed to establish a new connection: [Errno 111] Connection refused)
+
