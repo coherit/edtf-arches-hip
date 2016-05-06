@@ -1295,3 +1295,4 @@ Exception detail: search() got an unexpected keyword argument 'id'
 2016-05-05 13:57:41.517837 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
 2016-05-05 13:57:50.835037 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
 2016-05-05 13:57:57.762414 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
+2016-05-06 08:08:45.438113 - DeprecationWarning: Call to deprecated function user_can_edit. /home/ubuntu/projects/ENV/local/lib/python2.7/site-packages/arches/app/utils/context_processors.py:57
