@@ -15,7 +15,7 @@ The [LOC EDTF](http://www.loc.gov/standards/datetime/) provides an extension to 
 ## Supported Formats
 This project currently supports the following levels of features as specified in [EDTF](http://www.loc.gov/standards/datetime/pre-submission.html#features):
 
-###Level 0. ISO 8601 Features
+### Level 0. ISO 8601 Features
 
 | Feature       | Format | Examples | Notes |
 | ------------- | -------| -------- | ----- |
@@ -31,7 +31,7 @@ This project currently supports the following levels of features as specified in
 |				| YYYY-MM-DD/YYYY 	| 2004-02-01/2005 ||
 |				| YYYY/YYYY-MM		| 2005/2006-02 ||
 
-###Level 1 Extensions
+### Level 1 Extensions
 
 | Feature       | Format | Examples | Notes |
 | ------------- | -------| -------- | ----- |
@@ -50,7 +50,7 @@ This project currently supports the following levels of features as specified in
 ||YYYY~/YYYY-DD ... |1879~/1965-02|Any combination of approximate (~) and uncertain (?) can be entered as extended intervals in FROM_DATE.49 and TO_DATE.49 entities.|
 |Year exceeding four digits| YYYYYY or -YYYYYY | -240000 | In order to retain numeric integrity when sorting, this project departs from the EDTF format (which precedes such dates with 'y') and supports years of 5 or 6 digits.| 
 
-###Level 2 Extensions
+### Level 2 Extensions
 
 | Feature       | Format | Examples | Notes |
 | ------------- | -------| -------- | ----- |
